@@ -62,18 +62,18 @@ def scrapper(url):
 		
 		for a in crawler:
 			href=a.get('href')
-			# print(href)
+			print(href)
 
-		scrapper(crawler);
+		#scrapper(crawler);
 
-		with open('post.csv','a') as csv_file:
-			csv_writer=writer(csv_file)
-			headers=['Names']
-			csv_writer.writerow(headers)
+		# with open('post.csv','a') as csv_file:
+		# 	csv_writer=writer(csv_file)
+		# 	headers=['Names']
+		# 	csv_writer.writerow(headers)
 
-			for d in data:
-				name=d.get_text();
-				csv_writer.writerow([name])
+		# 	for d in data:
+		# 		name=d.get_text();
+		# 		csv_writer.writerow([name])
 
 			
 				
