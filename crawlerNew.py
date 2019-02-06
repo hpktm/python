@@ -80,4 +80,4 @@ def scrapper(url):
 
 for url in urls:
 	scrapper(url);
-	break;
+	break;   # comment it if wants all the files
