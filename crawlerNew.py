@@ -23,8 +23,6 @@ options=soup.find_all('option')
 
 typeName=[]
 
-
-
 #filtering data
 for option in options:
 	category=option.get_text();
@@ -33,7 +31,7 @@ for option in options:
 			if(category!='Starting from'):
 				if(category!='Ends with'):
 					str1=option.get_text();
-					typeName.append(str1);
+					typeName.append(str1.lower());
 
 
 typeName=typeName[:len(typeName)//2]
@@ -44,6 +42,7 @@ nameUrl=baseUrl+"/baby-names";
 
 urls=[];
 finalUrl=[];
+hrf=[]
 
 #creating distinct url for to scrapp full site 
 for typ in typeName:
@@ -54,7 +53,7 @@ for typ in typeName:
 			
 
 def scrapper(url):
-		i=0
+		hrf.append(url)
 		response=requests.get(url);
 		soup=BeautifulSoup(response.text,'html.parser')
 		data=soup.find_all(class_='nvar')
@@ -62,21 +61,21 @@ def scrapper(url):
 		
 		for a in crawler:
 			href=a.get('href')
-			print(href)
+			if(href):
+				if(href not in hrf):
+					hrf.append(href)
+					scrapper(href);
 
-		#scrapper(crawler);
+		fName=url.lower().split('/')
 
-		# with open('post.csv','a') as csv_file:
-		# 	csv_writer=writer(csv_file)
-		# 	headers=['Names']
-		# 	csv_writer.writerow(headers)
+		with open(fName[4]+'.csv','a') as csv_file:
+			csv_writer=writer(csv_file)
+			csv_writer.writerow(headers)
 
-		# 	for d in data:
-		# 		name=d.get_text();
-		# 		csv_writer.writerow([name])
-
-			
-				
+			for d in data:
+				name=d.get_text();
+				if(name is not 'Name'):
+					csv_writer.writerow([name])	
 
 
 for url in urls:
