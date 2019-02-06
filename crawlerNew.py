@@ -81,3 +81,6 @@ def scrapper(url):
 for url in urls:
 	scrapper(url);
 	break;   # comment it if wants all the files
+
+#song = '. cold heart'
+#print (song.replace('.', 'hurt'))   ---> for replaceing '. ' from indian regional option name 
