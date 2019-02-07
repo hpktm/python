@@ -26,14 +26,12 @@ typeName=[]
 #filtering data
 for option in options:
 	category=option.get_text();
-	if(category!='Category'):
-		if(category!='Contains'):
-			if(category!='Starting from'):
-				if(category!='Ends with'):
-					str1=option.get_text();
-					typeName.append(str1.lower());
+	if(category!='Category' and category!='Contains' and category!='Starting from' and category!='Ends with'):
+		str1=option.get_text();
+		str1=str1.replace('⋅ ', '')
+		typeName.append(str1.lower());
 
-
+#print(typeName);
 typeName=typeName[:len(typeName)//2]
 				
 # new url for crawler
@@ -46,10 +44,11 @@ hrf=[]
 
 #creating distinct url for to scrapp full site 
 for typ in typeName:
-	for g in gender:
 		for c in ascii_lowercase:
-			actualUrl=nameUrl+'/'+typ+'/'+g+'/'+c;
-			urls.append(actualUrl);
+			actualUrlboy=nameUrl+'/'+typ+'/'+gender[0]+'/'+c;
+			actualUrlgirl=nameUrl+'/'+typ+'/'+gender[1]+'/'+c;
+			urls.append(actualUrlboy);
+			urls.append(actualUrlgirl);
 			
 
 def scrapper(url):
@@ -80,7 +79,4 @@ def scrapper(url):
 
 for url in urls:
 	scrapper(url);
-	break;   # comment it if wants all the files
-
-#song = '. cold heart'
-#print (song.replace('.', 'hurt'))   ---> for replaceing '. ' from indian regional option name 
+	break;
